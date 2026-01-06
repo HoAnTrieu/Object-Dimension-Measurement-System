@@ -86,6 +86,23 @@ python main.py
 ```
 It will process all images, output measurements to console, and save results to the "result" folder.
 
+## How to Use and Workflow
+
+The scripts form a sequential pipeline for image processing and object measurement. Start with preparation, then preprocessing, and finally detection/measurement.
+
+1. **Generate Markers**: Run `gen-marker.py` to create ArUco markers for scaling reference. Print or place them in images.
+2. **Prepare Images**: Use `resize.py` or `Crop.py` to standardize image sizes. Place images in the required input folders (e.g., `720x960` for Crop.py, or hardcoded paths for resize.py).
+3. **Preprocess Images**: Run `TienXuLy.py` via Streamlit (`streamlit run TienXuLy.py`) to interactively apply preprocessing (blur, edges, thresholds, masks). Adjust parameters in the sidebar, process images from a `data` folder, and review outputs in `output` subfolders. This refines images for better downstream accuracy.
+4. **Detect and Measure**: Run `main.py` on the (preprocessed) images to detect center objects, measure dimensions in mm (using markers/cards for scaling), and save annotated results to `result`. Use `detect-maker.py` to test marker detection on a sample image first.
+5. **Utilities**: Run scripts individually as needed. Ensure dependencies are installed (`pip install pillow opencv-python numpy streamlit`).
+
+Workflow order: Preparation → Preprocessing (TienXuLy.py) → Measurement (main.py). Outputs from one can feed into another (e.g., preprocessed masks improve main.py detection).
+
+## Project Members
+- Ho An Trieu
+- Lai Do Minh Quan
+- Nguyen Vu Thanh
+
 ## Notes
 
 - Adjust hardcoded paths in the scripts as needed for your environment.
